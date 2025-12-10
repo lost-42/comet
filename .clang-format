@@ -1,12 +1,14 @@
 BasedOnStyle: Google
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: false
-AllowShortFunctionsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: true
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 BinPackParameters: false
 BreakBeforeBraces: Attach
+UseTab: Never
 IndentWidth: 4
 ColumnLimit: 80
 ReflowComments: false
 SortIncludes: true
+AccessModifierOffset: -4

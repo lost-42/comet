@@ -12,4 +12,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${OUTPUT_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${OUTPUT_DIR}")
 
 add_subdirectory(containers)
+add_subdirectory(language)
 add_subdirectory(memory)
