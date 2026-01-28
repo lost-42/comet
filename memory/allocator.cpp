@@ -63,7 +63,7 @@ struct S {
     bool flag{false};
 };
 
-int main() {
+void run_allocator() {
     int c = 0;
     std::vector<S, my_allocator<S>> v{};
     for (int i = 0; i < 7; ++i) {

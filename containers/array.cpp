@@ -56,7 +56,7 @@ static void test_deduction() {
     }
 }
 
-int main() {
+void run_array() {
     test_empty();
     test_swap();
     test_fill();

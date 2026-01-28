@@ -1,5 +1,6 @@
 #include <type_traits>
 #include <utility>
+#include <iostream>
 
 struct s1 {
     int val{0};
@@ -12,10 +13,12 @@ struct s1 {
     bool operator==(const s1& other) const { return val == other.val; }
 };
 
-int main() {
+void run_move_constructor() {
     static_assert(std::is_trivially_move_constructible_v<s1>,
                   "s1 can be moved");
 
     s1 s{1};
     s1 ss{std::move(s)};
+    
+    std::cout << "Move constructor test passed" << std::endl;
 }

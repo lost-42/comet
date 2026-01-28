@@ -111,7 +111,7 @@ static void test_resize() {
     }
 }
 
-int main() {
+void run_vector() {
     test_vector_bool();
     test_erase();
     test_growth_factor();
