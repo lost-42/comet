@@ -1,7 +1,7 @@
 #include <iostream>
-#include <limits>
-#include <memory>
 #include <vector>
+
+#include "inc/cpp11.h"
 
 static constexpr size_t DEFAULT_POOL_SIZE = 64 * 1024;
 
@@ -67,7 +67,7 @@ void run_allocator() {
     int c = 0;
     std::vector<S, my_allocator<S>> v{};
     for (int i = 0; i < 7; ++i) {
-        v.push_back(S{i, (char)('a' + i), i % 2 == 0});
+        // v.push_back(S{i, (char)('a' + i), i % 2 == 0});
         if (c == v.capacity())
             continue;
 

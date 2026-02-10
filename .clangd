@@ -1,0 +1,7 @@
+CompileFlags: # Tweak the parse settings
+    Add:
+        - "-Wall" # 启用所有警告
+        - "-Wextra" # 启用额外警告
+        - "-std=c++23" # 使用C++23标准
+
+    Compiler: clang++ # Change argv[0] of compile flags to `clang++`

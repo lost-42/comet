@@ -77,26 +77,28 @@ static void test_growth() {
     }
 }
 
+// c++23
 static void test_insert_range() {
-    std::cout << "[test_insert_range]" << std::endl;
+    // std::cout << "[test_insert_range]" << std::endl;
 
-    std::vector<int> v{1, 2, 3, 4, 5};
-    std::list<int> l{6, 7, 8};
-    v.insert_range(v.begin(), l);
-    for (int i : v) {
-        std::cout << i << std::endl;
-    }
+    // std::vector<int> v{1, 2, 3, 4, 5};
+    // std::list<int> l{6, 7, 8};
+    // v.insert_range(v.begin(), l);
+    // for (int i : v) {
+    //     std::cout << i << std::endl;
+    // }
 }
 
+// c++23
 static void test_append_range() {
-    std::cout << "[test_append_range]" << std::endl;
+    // std::cout << "[test_append_range]" << std::endl;
 
-    std::vector<int> v{1, 2, 3, 4, 5};
-    std::list<int> l{6, 7, 8};
-    v.append_range(l);
-    for (int i : v) {
-        std::cout << i << std::endl;
-    }
+    // std::vector<int> v{1, 2, 3, 4, 5};
+    // std::list<int> l{6, 7, 8};
+    // v.append_range(l);
+    // for (int i : v) {
+    //     std::cout << i << std::endl;
+    // }
 }
 
 static void test_resize() {

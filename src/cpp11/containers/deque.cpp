@@ -42,7 +42,7 @@ static void test_memory() {
     std::cout << std::endl;
 }
 
-void run_deque() {
+void run_deque_11() {
     test_push_pop();
     test_memory();
 }

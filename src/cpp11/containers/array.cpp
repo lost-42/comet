@@ -37,29 +37,18 @@ static void test_fill() {
     }
 }
 
-static void test_to_array() {
-    std::cout << "[test_to_array]" << std::endl;
-
-    int arr[5] = {1, 2, 3, 4, 5};
-    std::array<int, 5> a = std::to_array(arr);
-    for (int i : a) {
-        std::cout << i << std::endl;
-    }
-}
-
 static void test_deduction() {
-    std::cout << "[test_deduction]" << std::endl;
+    // std::cout << "[test_deduction]" << std::endl;
 
-    std::array a = {1, 2, 3, 4, 5}; /* do not specify type and size */
-    for (int i : a) {
-        std::cout << i << std::endl;
-    }
+    // std::array a = {1, 2, 3, 4, 5}; /* do not specify type and size */
+    // for (int i : a) {
+    //     std::cout << i << std::endl;
+    // }
 }
 
-void run_array() {
+void run_array_11() {
     test_empty();
     test_swap();
     test_fill();
-    test_to_array();
     test_deduction();
 }
