@@ -32,6 +32,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${OUTPUT_DIR}")
 
 # 添加 src 子目录
 add_subdirectory(src)
+add_subdirectory(toys/json)
 
 # 安装到bin目录
 install(TARGETS comet DESTINATION "${OUTPUT_DIR}")

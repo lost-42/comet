@@ -3,8 +3,8 @@
 #define CPP11_H
 
 /* containers */
-void run_array_11();
-void run_deque_11();
+void run_array();
+void run_deque();
 void run_string();
 void run_vector();
 

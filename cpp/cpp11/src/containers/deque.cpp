@@ -35,14 +35,15 @@ static void test_memory() {
     dq.push_front(4);
     dq.push_front(5); /* 5 4 1 2 */
 
-    std::cout << "max size: " << dq.size() << std::endl;
+    std::cout << "current size: " << dq.size() << std::endl
+              << "max size: " << dq.max_size() << std::endl;
     for (auto i : dq) {
         std::cout << i << " ";
     }
     std::cout << std::endl;
 }
 
-void run_deque_11() {
+void run_deque() {
     test_push_pop();
     test_memory();
 }

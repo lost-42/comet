@@ -1,6 +1,8 @@
 #include <array>
 #include <iostream>
 
+#include "inc/cpp11.h"
+
 static void test_empty() {
     std::cout << "[test_empty]" << std::endl;
     std::cout << std::boolalpha;
@@ -46,7 +48,7 @@ static void test_deduction() {
     // }
 }
 
-void run_array_11() {
+void run_array() {
     test_empty();
     test_swap();
     test_fill();
