@@ -11,7 +11,7 @@ input_file="$1"
 fn=$(basename -s .cpp "$input_file")
 
 # 构建命令
-build_cmd="clang++ -std=c++23 -stdlib=libc++ -fmodules -g -O0 $input_file utils.cpp -o $fn"
+build_cmd="clang++ -std=c++23 -stdlib=libc++ -g -O0 $input_file utils.cpp -o $fn"
 
 echo "构建命令: $build_cmd"
 echo ""
