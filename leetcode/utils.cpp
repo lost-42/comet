@@ -1,5 +1,6 @@
 #include "utils.h"
 
+#include <iostream>
 #include <queue>
 #include <vector>
 
@@ -40,4 +41,35 @@ void deleteTree(TreeNode* root) {
     deleteTree(root->left);
     deleteTree(root->right);
     delete root;
+}
+
+// 打印一维vector
+void printVector(const std::vector<int>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size(); i++) {
+        std::cout << vec[i];
+        if (i < vec.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "]";
+}
+
+// 打印二维vector
+void printVector2D(const std::vector<std::vector<int>>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size(); i++) {
+        std::cout << "[";
+        for (size_t j = 0; j < vec[i].size(); j++) {
+            std::cout << vec[i][j];
+            if (j < vec[i].size() - 1) {
+                std::cout << ",";
+            }
+        }
+        std::cout << "]";
+        if (i < vec.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "]";
 }

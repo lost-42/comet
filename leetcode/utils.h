@@ -2,6 +2,7 @@
 #define LEETCODE_UTILS_H
 
 #include <climits>
+#include <iostream>
 #include <queue>
 #include <vector>
 
@@ -23,5 +24,11 @@ TreeNode* buildTree(const std::vector<int>& nodes);
 
 // 删除二叉树，释放内存
 void deleteTree(TreeNode* root);
+
+// 通用打印函数
+// 打印一维vector
+void printVector(const std::vector<int>& vec);
+// 打印二维vector
+void printVector2D(const std::vector<std::vector<int>>& vec);
 
 #endif  // LEETCODE_UTILS_H
