@@ -27,8 +27,35 @@ void deleteTree(TreeNode* root);
 
 // 通用打印函数
 // 打印一维vector
-void printVector(const std::vector<int>& vec);
+template <typename T>
+void printVector(const std::vector<T>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size(); i++) {
+        std::cout << vec[i];
+        if (i < vec.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "]";
+}
 // 打印二维vector
-void printVector2D(const std::vector<std::vector<int>>& vec);
+template <typename T>
+void printVector2D(const std::vector<std::vector<T>>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size(); i++) {
+        std::cout << "[";
+        for (size_t j = 0; j < vec[i].size(); j++) {
+            std::cout << vec[i][j];
+            if (j < vec[i].size() - 1) {
+                std::cout << ",";
+            }
+        }
+        std::cout << "]";
+        if (i < vec.size() - 1) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "]";
+}
 
 #endif  // LEETCODE_UTILS_H
