@@ -4,32 +4,12 @@
 #include <unordered_set>
 #include <vector>
 
+#include "utils.h"
+
 using namespace std;
 
 class Solution {
 public:
-    int str2int(const string& str) {
-        int v{0};
-        for (size_t i = 0; i < str.size(); ++i)
-            v = (v << 1) + (str[i] - '0');
-        return v;
-    }
-
-    string int2str(int val, size_t n) {
-        string s{};
-        while (val) {
-            s.push_back((val & 1) + '0');
-            val >>= 1;
-        }
-
-        size_t sSize = s.size();
-        for (size_t i = 0; i < n - sSize; ++i)
-            s.push_back('0');
-
-        reverse(s.begin(), s.end());
-        return s;
-    }
-
     string findDifferentBinaryString(vector<string>& nums) {
         if (nums.empty())
             return "";
@@ -38,11 +18,11 @@ public:
 
         unordered_set<int> set{};
         for (auto& num : nums)
-            set.insert(str2int(num));
+            set.insert(binaryStringToInt(num));
 
         for (int i = 0; i < 1 << n; ++i)
             if (!set.contains(i))
-                return int2str(i, n);
+                return intToBinaryString(i, n);
 
         return "";
     }

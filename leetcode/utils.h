@@ -4,6 +4,7 @@
 #include <climits>
 #include <iostream>
 #include <queue>
+#include <string>
 #include <vector>
 
 // 二叉树节点定义
@@ -57,5 +58,14 @@ void printVector2D(const std::vector<std::vector<T>>& vec) {
     }
     std::cout << "]";
 }
+
+// 二进制字符串转整数
+int binaryStringToInt(const std::string& binaryStr);
+
+// 整数转二进制字符串（固定长度）
+std::string intToBinaryString(int value, size_t length);
+
+// 整数转二进制字符串（自动长度，不含前导零）
+std::string intToBinaryString(int value);
 
 #endif  // LEETCODE_UTILS_H
