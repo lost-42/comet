@@ -3,8 +3,10 @@
 
 #include <climits>
 #include <iostream>
+#include <map>
 #include <queue>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 // 二叉树节点定义
@@ -67,5 +69,23 @@ std::string intToBinaryString(int value, size_t length);
 
 // 整数转二进制字符串（自动长度，不含前导零）
 std::string intToBinaryString(int value);
+
+// 打印map（支持所有变体：map, unordered_map, multimap, unordered_multimap）
+template <template <typename, typename, typename...> class MapType,
+          typename K,
+          typename V,
+          typename... Args>
+void printMap(const MapType<K, V, Args...>& m) {
+    std::cout << "{";
+    auto it = m.begin();
+    while (it != m.end()) {
+        std::cout << it->first << ":" << it->second;
+        ++it;
+        if (it != m.end()) {
+            std::cout << ",";
+        }
+    }
+    std::cout << "}";
+}
 
 #endif  // LEETCODE_UTILS_H
