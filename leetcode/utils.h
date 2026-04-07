@@ -88,4 +88,38 @@ void printMap(const MapType<K, V, Args...>& m) {
     std::cout << "}";
 }
 
+// 打印queue（支持int和string类型）
+template <typename T>
+void printQueue(std::queue<T> q) {
+    std::cout << "[";
+    bool first = true;
+    while (!q.empty()) {
+        if (!first) {
+            std::cout << ",";
+        }
+        std::cout << q.front();
+        q.pop();
+        first = false;
+    }
+    std::cout << "]";
+}
+
+// 打印priority_queue（支持int和string类型及自定义比较器）
+template <typename T,
+          typename Container = std::vector<T>,
+          typename Compare = std::less<typename Container::value_type>>
+void printPriorityQueue(std::priority_queue<T, Container, Compare> pq) {
+    std::cout << "[";
+    bool first = true;
+    while (!pq.empty()) {
+        if (!first) {
+            std::cout << ",";
+        }
+        std::cout << pq.top();
+        pq.pop();
+        first = false;
+    }
+    std::cout << "]";
+}
+
 #endif  // LEETCODE_UTILS_H
