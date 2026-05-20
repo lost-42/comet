@@ -1,18 +1,30 @@
-# 测试规则
+---
+name: add-test
+description: 为 LeetCode 题目文件添加测试代码，不修改 Solution 类，只使用注释中的示例
+compatibility: ['Read', 'Edit', 'Write', 'Glob', 'Bash']
+---
+
+# Add Test
+
+## Overview
+
+为 LeetCode 题目文件添加基于注释示例的测试代码。
 
 ## 核心原则
 
-1. 不修改Solution类代码
+1. 不修改 Solution 类代码
 2. 只使用注释中的示例作为测试用例
-3. 添加main函数进行测试
+3. 添加 main 函数进行测试
 
-## 具体操作
+## Workflow
 
-1. 在Solution类后添加main函数
+当需要为题目文件添加测试时：
+
+1. 在 Solution 类后添加 main 函数
 2. 从注释的示例中提取测试数据
-3. 每个测试用例用{}包裹
+3. 每个测试用例用 `{}` 包裹
 4. 输出清晰的测试信息
-5. 一般不需要验证代码是否可以运行, 如果需要, 使用 `./lc.sh xxx.cpp`
+5. 一般不需要验证代码是否可以运行，如果需要，使用 `./lc.sh xxx.cpp`
 
 ## 示例格式
 
