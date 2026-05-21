@@ -1,46 +1,22 @@
 ---
 name: add-test
 description: 为 LeetCode 题目文件添加测试代码，不修改 Solution 类，只使用注释中的示例
-compatibility: ['Read', 'Edit', 'Write', 'Glob', 'Bash']
+compatibility: ['Read', 'Edit', 'Write']
 ---
 
 # Add Test
 
-## Overview
+## 原则
 
-为 LeetCode 题目文件添加基于注释示例的测试代码。
+1. 不修改 Solution 类
+2. 只使用注释中的 `示例` 部分作为测试数据
+3. 在 Solution 类后添加 `main()` 函数
 
-## 核心原则
+## 格式
 
-1. 不修改 Solution 类代码
-2. 只使用注释中的示例作为测试用例
-3. 添加 main 函数进行测试
-
-## Workflow
-
-当需要为题目文件添加测试时：
-
-1. 在 Solution 类后添加 main 函数
-2. 从注释的示例中提取测试数据
-3. 每个测试用例用 `{}` 包裹
-4. 输出清晰的测试信息
-5. 一般不需要验证代码是否可以运行，如果需要，使用 `./lc.sh xxx.cpp`
-
-## 示例格式
+每个测试用例用 `{}` 包裹，输出实际结果和期望值：
 
 ```cpp
-// 题目描述...
-// 示例1：输入：nums = [1,2,3]，输出：6
-
-#include <iostream>
-#include <vector>
-using namespace std;
-
-class Solution {
-public:
-    int sum(vector<int>& nums) { return 0; }
-};
-
 int main() {
     Solution solution;
 
@@ -56,3 +32,5 @@ int main() {
     return 0;
 }
 ```
+
+验证编译用 `./lc.sh xxx.cpp`。
