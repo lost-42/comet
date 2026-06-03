@@ -54,7 +54,7 @@ VIP 题目返回 exit code 2，跳过并回到 Step 1 选下一道。
 
 #### 3c. 头文件
 
-按需添加 `#include`，总是包含 `<iostream>`。若代码模板含 `TreeNode` 则使用 `#include "utils.h"`。
+按需添加 `#include`，总是包含 `"check.h"`（已包含 `<iostream>`、`"utils.h"` 和 `using namespace std` 之外所需的所有标准库头文件）。若代码模板需 `<algorithm>` 等额外头文件则按需补充。
 
 #### 3d. 写入 `<题号>.cpp`
 
@@ -63,7 +63,7 @@ VIP 题目返回 exit code 2，跳过并回到 Step 1 选下一道。
 //
 // https://leetcode.cn/problems/<title-slug>/description/
 
-#include <...>
+#include "check.h"
 using namespace std;
 
 class Solution {

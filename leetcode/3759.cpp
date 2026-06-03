@@ -31,11 +31,8 @@
 // https://leetcode.cn/problems/count-elements-with-at-least-k-greater-values/description/
 
 #include <algorithm>
-#include <functional>
 #include <iostream>
 #include <vector>
-
-#include "utils.h"
 
 using namespace std;
 
