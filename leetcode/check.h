@@ -1,15 +1,28 @@
 #ifndef LEETCODE_CHECK_H
 #define LEETCODE_CHECK_H
 
+#include <cmath>
 #include <iostream>
 #include <string>
 
 #include "utils.h"
 
-// 通用比较（int, bool, string, double 等有 == 和 << 的类型）
+// 通用比较（int, bool, string 等有 == 和 << 的类型）
 template <typename T>
 bool check(const std::string& label, const T& actual, const T& expected) {
     if (actual == expected) {
+        std::cout << "[🟢 PASS] " << label << std::endl;
+        return true;
+    }
+    std::cout << "[🔴 FAIL] " << label << std::endl;
+    std::cout << "  期望: " << expected << std::endl;
+    std::cout << "  实际: " << actual << std::endl;
+    return false;
+}
+
+// double 重载 — 使用容差比较（1e-5）
+inline bool check(const std::string& label, double actual, double expected) {
+    if (std::abs(actual - expected) < 1e-5) {
         std::cout << "[🟢 PASS] " << label << std::endl;
         return true;
     }
