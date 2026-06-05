@@ -29,10 +29,11 @@ This runs `clang++ -std=c++23 -stdlib=libc++ -g -O0 <id>.cpp utils.cpp -o <id>` 
 
 ## Skills
 
-Two custom skills automate problem workflow:
+Three custom skills automate problem workflow:
 
 - **`add-test`** — Adds a `main()` function with test cases parsed from the `示例` sections in the file's header comment. Never modifies the Solution class.
 - **`next-problem`** — Picks the next undone problem (rating ≥ highest solved rating), fetches problem content, scaffolds the `.cpp` file with header comment and Solution stub, then invokes `add-test`. Scripts live in `.claude/skills/next-problem/`: `prepare_queue.py` (builds queue from rating data), `find_next.py` (selects next problem), `fetch_problem.py` (fetches problem content from LeetCode CN API).
+- **`hint`** — Guides the user through optimizing a LeetCode solution via Socratic questioning. Never writes code or gives direct answers; uses folded `<details>` blocks so the user can think before seeing each insight. Triggered when the user asks for analysis, optimization hints, or complexity improvement suggestions.
 
 ## Behavior
 

@@ -44,6 +44,57 @@ void deleteTree(TreeNode* root) {
     delete root;
 }
 
+static void printTreeHelper(TreeNode* node, const std::string& prefix,
+                            bool isLeft) {
+    if (!node) return;
+
+    // 先打印右子树（显示在上方）
+    if (node->right)
+        printTreeHelper(node->right,
+                        prefix + (isLeft ? "│   " : "    "), false);
+
+    // 打印当前节点
+    std::cout << prefix;
+    if (prefix.empty()) {
+        std::cout << "── ";
+    } else {
+        std::cout << (isLeft ? "└── " : "┌── ");
+    }
+    std::cout << node->val << std::endl;
+
+    // 再打印左子树（显示在下方）
+    if (node->left)
+        printTreeHelper(node->left,
+                        prefix + (isLeft ? "    " : "│   "), true);
+}
+
+void printTree(TreeNode* root) {
+    if (!root) {
+        std::cout << "(null)" << std::endl;
+        return;
+    }
+    printTreeHelper(root, "", true);
+}
+
+std::vector<int> treeToVector(TreeNode* root) {
+    std::vector<int> v;
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty()) {
+        auto* n = q.front();
+        q.pop();
+        if (n) {
+            v.push_back(n->val);
+            q.push(n->left);
+            q.push(n->right);
+        } else {
+            v.push_back(INT_MIN);
+        }
+    }
+    while (!v.empty() && v.back() == INT_MIN) v.pop_back();
+    return v;
+}
+
 // 二进制字符串转整数
 int binaryStringToInt(const std::string& binaryStr) {
     int value = 0;

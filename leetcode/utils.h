@@ -28,6 +28,12 @@ TreeNode* buildTree(const std::vector<int>& nodes);
 // 删除二叉树，释放内存
 void deleteTree(TreeNode* root);
 
+// 打印二叉树（横向，root 在左，树向右生长）
+void printTree(TreeNode* root);
+
+// 二叉树转层序遍历数组（INT_MIN 表示 null，去除尾部 null）
+std::vector<int> treeToVector(TreeNode* root);
+
 // 通用打印函数
 // 打印一维vector
 template <typename T>
