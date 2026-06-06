@@ -30,7 +30,7 @@ python3 .claude/skills/next-problem/prepare_queue.py
 ### Step 2: 获取题目内容
 
 ```bash
-python3 .claude/skills/next-problem/fetch_problem.py <title-slug> > /tmp/leet.json
+python3 .claude/skills/next-problem/fetch_problem.py -o /tmp/leet.json <title-slug>
 ```
 
 返回 JSON 字段：`questionId`, `questionFrontendId`, `translatedTitle`, `translatedContent`（HTML）, `codeSnippets`, `exampleTestcases`

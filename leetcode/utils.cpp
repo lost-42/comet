@@ -1,6 +1,7 @@
 #include "utils.h"
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -93,6 +94,18 @@ std::vector<int> treeToVector(TreeNode* root) {
     }
     while (!v.empty() && v.back() == INT_MIN) v.pop_back();
     return v;
+}
+
+bool isPrime(int num) {
+    if (num < 2)
+        return false;
+    if (num == 2)
+        return true;
+    for (int i = 2; i * i <= num; ++i) {
+        if (num % i == 0)
+            return false;
+    }
+    return true;
 }
 
 // 二进制字符串转整数

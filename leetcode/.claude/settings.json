@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./lc.sh *)",
+      "Bash(python3 .claude/skills/next-problem/*)"
+    ],
+    "additionalDirectories": ["/tmp"]
+  }
+}

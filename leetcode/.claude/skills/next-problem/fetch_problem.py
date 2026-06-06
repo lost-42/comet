@@ -68,7 +68,19 @@ if __name__ == "__main__":
     args = sys.argv[1:]
 
     if not args:
-        print("Usage: fetch_problem.py <title-slug>", file=sys.stderr)
+        print("Usage: fetch_problem.py [-o <outfile>] <title-slug>", file=sys.stderr)
+        sys.exit(1)
+
+    outfile = None
+    if args[0] == "-o":
+        if len(args) < 3:
+            print("Usage: fetch_problem.py [-o <outfile>] <title-slug>", file=sys.stderr)
+            sys.exit(1)
+        outfile = args[1]
+        args = args[2:]
+
+    if not args:
+        print("Usage: fetch_problem.py [-o <outfile>] <title-slug>", file=sys.stderr)
         sys.exit(1)
 
     if args[0] == "--has-content":
@@ -81,4 +93,8 @@ if __name__ == "__main__":
     else:
         slug = args[0]
         question = fetch(slug)
-        json.dump(question, sys.stdout, ensure_ascii=False, indent=2)
+        if outfile:
+            with open(outfile, "w", encoding="utf-8") as f:
+                json.dump(question, f, ensure_ascii=False, indent=2)
+        else:
+            json.dump(question, sys.stdout, ensure_ascii=False, indent=2)

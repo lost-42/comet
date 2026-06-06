@@ -67,6 +67,9 @@ void printVector2D(const std::vector<std::vector<T>>& vec) {
     std::cout << "]";
 }
 
+// 判断素数
+bool isPrime(int num);
+
 // 二进制字符串转整数
 int binaryStringToInt(const std::string& binaryStr);
 
