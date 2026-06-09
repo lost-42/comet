@@ -10,7 +10,7 @@ import sys
 from datetime import date
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-REVIEW_FILE = os.path.join(SCRIPT_DIR, "..", "..", "..", "review.md")
+REVIEW_FILE = os.path.join(SCRIPT_DIR, "review.md")
 
 
 def main():

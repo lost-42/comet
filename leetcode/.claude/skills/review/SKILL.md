@@ -8,7 +8,7 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash']
 
 ## 核心逻辑
 
-维护项目根目录的 `review.md`（markdown 表格），记录题目序号、标题、加入日期、复习日期。复习日期为 `-` 表示未复习。
+维护 skill 目录下的 `review.md`（markdown 表格），记录题目序号、标题、加入日期、复习日期。复习日期为 `-` 表示未复习。
 
 选取策略：从加入 ≥ 3 天的未复习题目中随机抽一道，清空对应 `.cpp` 文件中的 Solution 类方法体。
 

@@ -12,6 +12,21 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash', 'Skill']
 
 ## Workflow
 
+### Step 0: 优先检查复习列表
+
+先检查是否有适合复习的题目：
+
+```bash
+python3 .claude/skills/review/pick_for_review.py
+```
+
+如果有（exit 0），输出 JSON `{"id": ..., "title": ..., "added_date": ...}`：
+- 读取 `<id>.cpp`，清空 Solution 方法体（`void` → `{ }`，其他 → `{ return {}; }`）
+- 告知用户："请复习 #<id> <title>，文件 <id>.cpp 已清空 Solution 实现"
+- **结束，不再执行后续步骤。**
+
+如果没有（exit 1），继续 Step 1。
+
 ### Step 1: 选择下一道未做题
 
 ```bash
