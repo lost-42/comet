@@ -22,7 +22,7 @@ from datetime import date, timedelta
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REVIEW_FILE = os.path.join(SCRIPT_DIR, "review.md")
 
-MIN_AGE_DAYS = 3
+MIN_AGE_DAYS = 20
 
 
 def parse_review_file() -> list[dict]:

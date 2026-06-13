@@ -24,13 +24,15 @@
 //
 // https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/
 
+#include <array>
+
 #include "check.h"
 using namespace std;
 
 class Solution {
 public:
     int numPairsDivisibleBy60(vector<int>& time) {
-        int arr[60]{};
+        array<int, 60> arr{};
         for (int t : time) {
             ++arr[t % 60];
         }
