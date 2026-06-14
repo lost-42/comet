@@ -43,12 +43,40 @@
 // https://leetcode.cn/problems/complete-prime-number/description/
 
 #include "check.h"
+#include "utils.h"
 using namespace std;
 
 class Solution {
 public:
     bool completePrime(int num) {
-        return false;
+        if (!isPrime(num))
+            return false;
+
+        vector<int> vec{};
+        while (num) {
+            vec.push_back(num % 10);
+            num /= 10;
+        }
+
+        /* prefix */
+        int n{0};
+        int p{0};
+        for (auto it = vec.begin(); it != vec.end(); ++it) {
+            n = pow(10, p) * (*it) + n;
+            if (!isPrime(n))
+                return false;
+            ++p;
+        }
+
+        /* suffix */
+        n = 0;
+        for (auto it = vec.rbegin(); it != vec.rend(); ++it) {
+            n = n * 10 + *it;
+            if (!isPrime(n))
+                return false;
+        }
+
+        return true;
     }
 };
 
@@ -74,6 +102,13 @@ int main() {
         int num = 7;
         bool result = solution.completePrime(num);
         check("示例3: num=7", result, true);
+    }
+
+    // 额外用例
+    {
+        int num = 787;
+        bool result = solution.completePrime(num);
+        check("用例: num=787", result, false);
     }
 
     return 0;

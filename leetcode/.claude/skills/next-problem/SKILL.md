@@ -12,7 +12,21 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash', 'Skill']
 
 ## Workflow
 
-### Step 0: 优先检查复习列表
+### Step 0: 检测是否有用户提供的 URL
+
+如果用户调用时提供了 URL（如 `https://leetcode.cn/contest/weekly-contest-XXX/problems/<slug>/`），进入**手动模式**：
+
+1. 从 URL 中提取 `slug`（`/problems/` 到末尾 `/` 之间的部分）作为文件名：`<slug>.cpp`
+2. 要求用户提供两部分内容：
+   - **题目描述**：包括示例，会放入文件头注释
+   - **Solution 占位代码**：方法签名部分
+3. 创建文件，格式同 Step 4
+4. 调用 `add-test` 添加测试
+5. **结束。**
+
+如果没有 URL，继续 Step 1。
+
+### Step 1: 优先检查复习列表
 
 先检查是否有适合复习的题目：
 
@@ -25,9 +39,9 @@ python3 .claude/skills/review/pick_for_review.py
 - 告知用户："请复习 #<id> <title>，文件 <id>.cpp 已清空 Solution 实现"
 - **结束，不再执行后续步骤。**
 
-如果没有（exit 1），继续 Step 1。
+如果没有（exit 1），继续 Step 2。
 
-### Step 1: 选择下一道未做题
+### Step 2: 选择下一道未做题
 
 ```bash
 python3 .claude/skills/next-problem/find_next.py
@@ -42,7 +56,7 @@ python3 .claude/skills/next-problem/find_next.py
 python3 .claude/skills/next-problem/prepare_queue.py
 ```
 
-### Step 2: 获取题目内容
+### Step 3: 获取题目内容
 
 ```bash
 python3 .claude/skills/next-problem/fetch_problem.py -o /tmp/leet.json <title-slug>
@@ -50,9 +64,9 @@ python3 .claude/skills/next-problem/fetch_problem.py -o /tmp/leet.json <title-sl
 
 返回 JSON 字段：`questionId`, `questionFrontendId`, `translatedTitle`, `translatedContent`（HTML）, `codeSnippets`, `exampleTestcases`
 
-VIP 题目返回 exit code 2，跳过并回到 Step 1 选下一道。
+VIP 题目返回 exit code 2，跳过并回到 Step 2 选下一道。
 
-### Step 3: 创建 .cpp 文件
+### Step 4: 创建 .cpp 文件
 
 #### 3a. 处理题目描述
 
@@ -89,6 +103,6 @@ public:
 
 不要添加 main 函数（留给 add-test）。
 
-### Step 4: 调用 add-test
+### Step 5: 调用 add-test
 
 使用 Skill 工具调用 `add-test`，传入刚创建的 `.cpp` 文件名。

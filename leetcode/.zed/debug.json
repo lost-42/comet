@@ -1,0 +1,26 @@
+// Project-local debug tasks for LeetCode C++ files.
+//
+// See: https://zed.dev/docs/debugger
+//      https://zed.dev/docs/languages/cpp#debugging
+[
+    {
+        "label": "Debug current C++ file",
+        "build": {
+            "command": "clang++",
+            "args": [
+                "-std=c++23",
+                "-stdlib=libc++",
+                "-g",
+                "-O0",
+                "$ZED_FILE",
+                "utils.cpp",
+                "-o",
+                "$ZED_DIRNAME/$ZED_STEM"
+            ],
+            "cwd": "$ZED_WORKTREE_ROOT"
+        },
+        "program": "$ZED_DIRNAME/$ZED_STEM",
+        "request": "launch",
+        "adapter": "CodeLLDB"
+    }
+]
