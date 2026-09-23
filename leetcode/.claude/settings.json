@@ -2,6 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(./lc.sh *)",
+      "Bash(./scripts/lc.cmd *)",
+      "Bash(./scripts/lc-build.cmd *)",
       "Bash(python3 .claude/skills/next-problem/*)"
     ],
     "additionalDirectories": ["/tmp"]

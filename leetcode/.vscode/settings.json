@@ -1,0 +1,18 @@
+{
+  // Sources are compiled with /utf-8, so the programs emit UTF-8 bytes.
+  // Windows PowerShell defaults to the GBK (936) code page and would show
+  // mojibake (e.g. "示例" -> "绀轰緥"); start the integrated terminal in
+  // UTF-8 instead. This covers both task runs and the cppvsdbg debug console.
+  "terminal.integrated.profiles.windows": {
+    "PowerShell (UTF-8)": {
+      "source": "PowerShell",
+      "args": [
+        "-NoLogo",
+        "-NoExit",
+        "-Command",
+        "chcp 65001 > $null; [Console]::OutputEncoding = [System.Text.Encoding]::UTF8"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell (UTF-8)"
+}

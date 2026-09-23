@@ -1,0 +1,19 @@
+{
+  // Microsoft C/C++ extension (ms-vscode.cpptools): provides the cppvsdbg
+  // debugger on Windows and IntelliSense (via the compile database, see
+  // .vscode/settings.json).
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "learn (MSVC, debug)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/learn.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "preLaunchTask": "learn: build"
+    }
+  ]
+}

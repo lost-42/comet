@@ -1,0 +1,24 @@
+{
+  // The Microsoft C/C++ extension owns IntelliSense here (no clangd).
+  // Point it at the compile database exported by CMake; run scripts/build.cmd
+  // once so build/debug/compile_commands.json exists.
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/debug/compile_commands.json",
+  "C_Cpp.default.cppStandard": "c++23",
+  "C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
+
+  // Sources are compiled with /utf-8, so the programs emit UTF-8 bytes.
+  // Windows PowerShell defaults to the GBK (936) code page and would show
+  // mojibake; start the integrated terminal in UTF-8 instead.
+  "terminal.integrated.profiles.windows": {
+    "PowerShell (UTF-8)": {
+      "source": "PowerShell",
+      "args": [
+        "-NoLogo",
+        "-NoExit",
+        "-Command",
+        "chcp 65001 > $null; [Console]::OutputEncoding = [System.Text.Encoding]::UTF8"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell (UTF-8)"
+}

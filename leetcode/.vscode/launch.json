@@ -1,0 +1,18 @@
+{
+  // Microsoft C/C++ extension (ms-vscode.cpptools): provides both IntelliSense
+  // (c_cpp_properties.json) and the cppvsdbg debugger on Windows.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "lc: debug current file",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "console": "integratedTerminal",
+      "preLaunchTask": "lc: build current file"
+    }
+  ]
+}

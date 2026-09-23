@@ -1,45 +1,35 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.23)
 
-# 设置 Clang 编译器
-set(CMAKE_C_COMPILER "/usr/bin/clang")
-set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+project(learn LANGUAGES CXX)
 
-# 全局C++标准设置
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+# ---------------------------------------------------------------------------
+# Toolchain / standard selection lives in CMakePresets.json, not here.
+# This file must stay portable: no hardcoded compiler paths, no -stdlib=...
+# ---------------------------------------------------------------------------
 
-# 全局模块支持标志
-add_compile_options(
-    -stdlib=libc++
-    -fmodules
-    -fbuiltin-module-map
-    -fimplicit-modules
-    -fimplicit-module-maps
+# Pick up every .cpp under src/ (recursive). CONFIGURE_DEPENDS makes the build
+# system re-run the glob at build time, so adding a new test file does NOT
+# require editing this list or re-configuring by hand.
+file(GLOB_RECURSE LEARN_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
-add_link_options(-stdlib=libc++)
+add_executable(learn ${LEARN_SOURCES})
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+target_include_directories(learn PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party"
+)
 
-project(comet)
+target_compile_features(learn PRIVATE cxx_std_23)
 
-set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin")
+# Sources may carry UTF-8 comments/strings; tell MSVC so it does not warn
+# (C4819) or mangle them on non-UTF-8 code pages.
+if(MSVC)
+    target_compile_options(learn PRIVATE /utf-8)
+endif()
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${OUTPUT_DIR}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${OUTPUT_DIR}")
-
-# 添加 src 子目录
-add_subdirectory(src)
-add_subdirectory(toys/json)
-
-# 安装到bin目录
-install(TARGETS comet DESTINATION "${OUTPUT_DIR}")
-
-# 打印配置信息
-message(STATUS "项目名称: ${PROJECT_NAME}")
-message(STATUS "C++标准: ${CMAKE_CXX_STANDARD}")
-message(STATUS "编译器: ${CMAKE_CXX_COMPILER}")
-message(STATUS "输出目录: ${OUTPUT_DIR}")
-message(STATUS "C++20模块支持已启用")
+# Stable output path so editor tasks can always find bin/learn.exe
+set_target_properties(learn PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)

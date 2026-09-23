@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // type: "process" runs cmd.exe directly instead of going through the
+      // terminal's shell (PowerShell). That avoids both the GBK decoding of
+      // UTF-8 output and the conflicts of a shell profile that uses -Command.
+      "label": "learn: build",
+      "type": "process",
+      "command": "cmd",
+      "args": ["/c", "scripts\\build.cmd"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$msCompile"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "learn: build & run",
+      "type": "process",
+      "command": "cmd",
+      "args": ["/c", "scripts\\run.cmd"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$msCompile"],
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "learn: clean",
+      "type": "process",
+      "command": "cmd",
+      "args": ["/c", "scripts\\clean.cmd"],
+      "options": { "cwd": "${workspaceFolder}" }
+    }
+  ]
+}

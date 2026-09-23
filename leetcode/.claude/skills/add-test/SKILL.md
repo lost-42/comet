@@ -39,4 +39,4 @@ int main() {
 }
 ```
 
-添加完 main 函数后用 `./lc.sh xxx.cpp` 验证编译运行。
+添加完 main 函数后用 `scripts\lc.cmd xxx.cpp` 验证编译运行。

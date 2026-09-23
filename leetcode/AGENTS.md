@@ -4,21 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build & Run
 
-Each `X.cpp` file is self-contained (Solution class + main function). Build and run with:
+Each `X.cpp` file is self-contained (Solution class + main function). Build, run and clean up with:
 
 ```bash
-./lc.sh <id>.cpp
+scripts\lc.cmd <id>.cpp
 ```
 
-This runs `clang++ -std=c++23 -stdlib=libc++ -g -O0 <id>.cpp utils.cpp -o <id>` then executes the binary and cleans it up. If the problem uses `TreeNode`, also include `utils.h` and link `utils.cpp`.
+This initializes the MSVC environment (`scripts/msvc-env.cmd` -> vcvars64), then runs `cl /std:c++latest /EHsc /utf-8 /Z7 /Od <id>.cpp utils.cpp` into a temporary exe, executes it, and deletes the exe/obj. `scripts/lc-build.cmd <id>.cpp` is compile-only and is used as the VSCode preLaunch task for debugging. (The old WSL script was `./lc.sh`.) If the problem uses `TreeNode`, also include `utils.h` and link `utils.cpp`.
+
+In VSCode: task **lc: build & run current file** (`Ctrl+Shift+B` runs the build task, or bind the run task); **F5** builds and debugs the current file.
 
 ## Project structure
 
 - `X.cpp` — LeetCode problem #X with a `class Solution` and a `main()` containing inline test cases (actual vs expected printed to stdout)
 - `utils.h` / `utils.cpp` — shared helpers: `TreeNode` / `buildTree` / `deleteTree`, `printVector`, `printVector2D`, `printMap`, `printQueue`, `printPriorityQueue`, `intToBinaryString`, `binaryStringToInt`
-- `lc.sh` — build-and-run script
+- `lc.sh` — legacy POSIX build-and-run script (WSL); superseded by `scripts/lc.cmd`
+- `scripts/lc.cmd` / `scripts/lc-build.cmd` — MSVC build-and-run / build-only
+- `scripts/msvc-env.cmd` — initializes the MSVC x64 environment (vcvars64)
 - `.clang-format` — Google-based style, 4-space indent, 80-col limit, C++23
-- `.clangd` — LSP config with `-std=c++23 -stdlib=libc++`
+- `.clangd` — (removed) IntelliSense is now the Microsoft C/C++ extension, configured via `.vscode/c_cpp_properties.json`
 
 ## Format
 
