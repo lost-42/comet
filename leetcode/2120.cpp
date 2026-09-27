@@ -55,18 +55,6 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> nextPos(const vector<int>& pos, char ch) {
-        if (ch == 'U')
-            return {pos[0] - 1, pos[1]};
-        else if (ch == 'D')
-            return {pos[0] + 1, pos[1]};
-        else if (ch == 'L')
-            return {pos[0], pos[1] - 1};
-        else if (ch == 'R')
-            return {pos[0], pos[1] + 1};
-        return {};
-    }
-
     bool isInRange(int n, const vector<int>& pos) {
         if (pos[0] < 0 || pos[0] >= n)
             return false;
@@ -75,25 +63,49 @@ public:
         return true;
     }
 
-    int getAns(int n, const vector<int>& startPos, string_view sv) {
-        int cnt{0};
-        auto pos = startPos;
-        for (char ch : sv) {
-            pos = nextPos(pos, ch);
-            if (!isInRange(n, pos))
-                return cnt;
-
-            ++cnt;
-        }
-        return cnt;
-    }
-
     vector<int> executeInstructions(int n, vector<int>& startPos, string s) {
-        vector<int> ans{};
-        ans.reserve(s.size());
+        size_t m = s.size();
 
-        for (auto it = s.begin(); it != s.end(); ++it) {
-            ans.push_back(getAns(n, startPos, string_view(it, s.end())));
+        vector<int> pref_row(m + 1, 0), pref_col(m + 1, 0);
+        for (size_t i = 1; i < m + 1; ++i) {
+            char ch = s[i - 1];
+            if (ch == 'U') {
+                pref_row[i] = pref_row[i - 1] - 1;
+                pref_col[i] = pref_col[i - 1];
+            } else if (ch == 'D') {
+                pref_row[i] = pref_row[i - 1] + 1;
+                pref_col[i] = pref_col[i - 1];
+            } else if (ch == 'L') {
+                pref_row[i] = pref_row[i - 1];
+                pref_col[i] = pref_col[i - 1] - 1;
+            } else if (ch == 'R') {
+                pref_row[i] = pref_row[i - 1];
+                pref_col[i] = pref_col[i - 1] + 1;
+            }
+        }
+
+        vector<int> ans{};
+        ans.reserve(m);
+
+        for (size_t i = 0; i < m; ++i) {
+            int upper_bound_r = pref_row[i] + n - 1 - startPos[0];
+            int lower_bound_r = pref_row[i] - startPos[0];
+            int upper_bound_c = pref_col[i] + n - 1 - startPos[1];
+            int lower_bound_c = pref_col[i] - startPos[1];
+
+            for (size_t k = i + 1; k <= m; ++k) {
+                if (pref_row[k] < lower_bound_r ||
+                    pref_row[k] > upper_bound_r) {
+                    ans.push_back(k - i - 1);
+                    break;
+                } else if (pref_col[k] < lower_bound_c ||
+                           pref_col[k] > upper_bound_c) {
+                    ans.push_back(k - i - 1);
+                    break;
+                }
+            }
+            if (ans.size() != i + 1)
+                ans.push_back(m - i);
         }
         return ans;
     }
