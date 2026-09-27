@@ -1,7 +1,7 @@
 ---
 name: review
 description: 管理 LeetCode 复习列表。添加题目到复习列表，或从列表中抽取题目复习（清空 Solution 代码）。
-compatibility: ['Read', 'Edit', 'Write', 'Bash']
+compatibility: Requires read, edit, write, and bash tools; Python 3 via uv.
 ---
 
 # Review
@@ -23,7 +23,7 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash']
    - 更直接的方式：读取文件第一行注释，通常中文标题在文件头部。若无法确定，用文件名作为 fallback
 3. 运行：
    ```bash
-   python3 .claude/skills/review/add_to_review.py <id> "<title>"
+   uv run --no-project python .pi/skills/review/add_to_review.py <id> "<title>"
    ```
 
 ### 复习模式
@@ -32,7 +32,7 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash']
 
 1. 运行：
    ```bash
-   python3 .claude/skills/review/pick_for_review.py
+   uv run --no-project python .pi/skills/review/pick_for_review.py
    ```
    exit 1 则告知用户无合适题目并结束
 2. 解析 JSON 输出 `{"id": ..., "title": ..., "added_date": ...}`

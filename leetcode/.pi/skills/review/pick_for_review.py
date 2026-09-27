@@ -5,7 +5,7 @@ Filters: added >= 3 days ago, not yet reviewed (review_date == "-").
 Randomly selects one, updates its review_date to today, prints JSON.
 
 Usage:
-    python3 pick_for_review.py
+    uv run --no-project python pick_for_review.py
 
 Exit codes:
     0 - found eligible problem (JSON to stdout)
@@ -18,6 +18,9 @@ import random
 import re
 import sys
 from datetime import date, timedelta
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REVIEW_FILE = os.path.join(SCRIPT_DIR, "review.md")
@@ -88,7 +91,7 @@ def main():
         rf"^(\|\s*{re.escape(str(chosen['id']))}\s*\|\s*{re.escape(chosen['title'])}\s*\|\s*{re.escape(chosen['added_date'])}\s*\|\s*)-(\s*\|)$",
         re.MULTILINE,
     )
-    new_line = rf"\1{today.isoformat()}\2"
+    new_line = rf"\g<1>{today.isoformat()}\g<2>"
     content, count = old_row_pat.subn(new_line, content)
 
     if count > 0:

@@ -2,7 +2,7 @@
 """Sort ratings.txt by rating (ascending) and write to problem_queue.txt.
 
 Usage:
-    python3 prepare_queue.py
+    uv run --no-project python prepare_queue.py
 """
 
 import os

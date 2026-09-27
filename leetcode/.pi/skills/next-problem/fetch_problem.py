@@ -2,8 +2,8 @@
 """Fetch LeetCode problem data from leetcode.cn GraphQL API.
 
 Usage:
-    python3 fetch_problem.py <title-slug>      # output JSON to stdout
-    python3 fetch_problem.py --has-content <title-slug>  # exit 0 iff accessible (non-VIP)
+    uv run --no-project python fetch_problem.py <title-slug>      # output JSON to stdout
+    uv run --no-project python fetch_problem.py --has-content <title-slug>  # exit 0 iff accessible (non-VIP)
 
 Fields returned (JSON):
     questionId, questionFrontendId, translatedTitle, translatedContent,
@@ -19,6 +19,9 @@ import json
 import sys
 import urllib.error
 import urllib.request
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 GRAPHQL_URL = "https://leetcode.cn/graphql"
 

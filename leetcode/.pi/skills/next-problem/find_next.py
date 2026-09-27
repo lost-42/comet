@@ -7,8 +7,8 @@ whose rating is >= that threshold.  This way the user always moves forward
 in difficulty instead of going back to globally-lowest undone problems.
 
 Usage:
-    python3 find_next.py              # prints JSON for next undone problem
-    python3 find_next.py --all-done   # exit 0 only if all problems are done
+    uv run --no-project python find_next.py              # prints JSON for next undone problem
+    uv run --no-project python find_next.py --all-done   # exit 0 only if all problems are done
 
 Exit codes:
     0 - found next problem
@@ -20,6 +20,9 @@ import json
 import os
 import re
 import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 QUEUE_FILE = os.path.join(SCRIPT_DIR, "problem_queue.txt")

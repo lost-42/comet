@@ -1,7 +1,7 @@
 ---
 name: hint
 description: 引导用户优化 LeetCode 题解，只提供思路不写代码，通过提问-等待-揭示的节奏帮助用户自己发现解法
-compatibility: ['Read']
+compatibility: Requires the read tool.
 ---
 
 # Hint
@@ -17,7 +17,7 @@ compatibility: ['Read']
 
 ### Step 1: 读懂用户代码
 
-使用 Read 读取 `.cpp` 文件，理解用户当前的解法。
+使用 `read` 工具读取 `.cpp` 文件，理解用户当前的解法。
 
 ### Step 2: 指出瓶颈
 
@@ -75,6 +75,6 @@ intervals = [[1,8], [1,4]]
 
 ## 不适用场景
 
-- 用户直接问"这题怎么写"、"给我答案" → 按 CLAUDE.md Behavior 规则，不提供解法
+- 用户直接问"这题怎么写"、"给我答案" → 按 AGENTS.md Behavior 规则，不提供解法
 - 用户问的是编译/运行/测试问题 → 直接帮助解决机械问题
 - 用户只是想确认当前解法是否正确 → 直接评价即可

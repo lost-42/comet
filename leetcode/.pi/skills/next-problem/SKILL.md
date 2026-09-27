@@ -1,7 +1,7 @@
 ---
 name: next-problem
 description: 从已做题目最高 rating 出发，选择未做题目中 rating 不低于该阈值的最低分题目，获取内容并创建 .cpp 文件，然后调用 add-test 添加测试
-compatibility: ['Read', 'Edit', 'Write', 'Bash', 'Skill']
+compatibility: Requires read, edit, write, and bash tools; Python 3 via uv.
 ---
 
 # Next Problem
@@ -9,6 +9,14 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash', 'Skill']
 ## 核心逻辑
 
 已做题目的最高 rating 为基准线，从未做题中选择 rating ≥ 该基准的最低分题目，保证难度始终递增。自动跳过 VIP 题目。
+
+## 运行 Python 脚本
+
+本 skill 的脚本用 Python 3 运行。本机（Windows）没有可用的 `python3`，统一用 uv 运行：
+
+```bash
+uv run --no-project python .pi/skills/next-problem/<script>.py
+```
 
 ## Workflow
 
@@ -21,7 +29,7 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash', 'Skill']
    - **题目描述**：包括示例，会放入文件头注释
    - **Solution 占位代码**：方法签名部分
 3. 创建文件，格式同 Step 4
-4. 调用 `add-test` 添加测试
+4. 调用 `add-test` 添加测试（读取 `.pi/skills/add-test/SKILL.md` 并按其执行）
 5. **结束。**
 
 如果没有 URL，继续 Step 1。
@@ -31,7 +39,7 @@ compatibility: ['Read', 'Edit', 'Write', 'Bash', 'Skill']
 先检查是否有适合复习的题目：
 
 ```bash
-python3 .claude/skills/review/pick_for_review.py
+uv run --no-project python .pi/skills/review/pick_for_review.py
 ```
 
 如果有（exit 0），输出 JSON `{"id": ..., "title": ..., "added_date": ...}`：
@@ -44,7 +52,7 @@ python3 .claude/skills/review/pick_for_review.py
 ### Step 2: 选择下一道未做题
 
 ```bash
-python3 .claude/skills/next-problem/find_next.py
+uv run --no-project python .pi/skills/next-problem/find_next.py
 ```
 
 输出 JSON：`{"id": <题号>, "title": "<英文标题>", "title_zh": "<中文标题>", "title_slug": "<slug>", "rating": <rating>, ...}`
@@ -53,16 +61,16 @@ python3 .claude/skills/next-problem/find_next.py
 
 前置条件：`problem_queue.txt` 必须存在，不存在则运行：
 ```bash
-python3 .claude/skills/next-problem/prepare_queue.py
+uv run --no-project python .pi/skills/next-problem/prepare_queue.py
 ```
 
 ### Step 3: 获取题目内容
 
 ```bash
-python3 .claude/skills/next-problem/fetch_problem.py -o /tmp/leet.json <title-slug>
+uv run --no-project python .pi/skills/next-problem/fetch_problem.py <title-slug>
 ```
 
-返回 JSON 字段：`questionId`, `questionFrontendId`, `translatedTitle`, `translatedContent`（HTML）, `codeSnippets`, `exampleTestcases`
+stdout 返回 JSON 字段：`questionId`, `questionFrontendId`, `translatedTitle`, `translatedContent`（HTML）, `codeSnippets`, `exampleTestcases`
 
 VIP 题目返回 exit code 2，跳过并回到 Step 2 选下一道。
 
@@ -105,4 +113,4 @@ public:
 
 ### Step 5: 调用 add-test
 
-使用 Skill 工具调用 `add-test`，传入刚创建的 `.cpp` 文件名。
+读取 `.pi/skills/add-test/SKILL.md`，按其步骤为刚创建的 `.cpp` 文件添加测试。

@@ -1,7 +1,7 @@
 ---
 name: add-test
 description: 为 LeetCode 题目文件添加测试代码，不修改 Solution 类，只使用注释中的示例
-compatibility: ['Read', 'Edit', 'Write']
+compatibility: Requires read, edit, and write tools.
 ---
 
 # Add Test

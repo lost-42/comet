@@ -2,12 +2,15 @@
 """Add a problem to the review list (review.md in project root).
 
 Usage:
-    python3 add_to_review.py <problem_id> "<title>"
+    uv run --no-project python add_to_review.py <problem_id> "<title>"
 """
 
 import os
 import sys
 from datetime import date
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REVIEW_FILE = os.path.join(SCRIPT_DIR, "review.md")
