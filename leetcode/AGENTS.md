@@ -10,19 +10,23 @@ Each `X.cpp` file is self-contained (Solution class + main function). Build, run
 scripts\lc.cmd <id>.cpp
 ```
 
-This initializes the MSVC environment (`scripts/msvc-env.cmd` -> vcvars64), then runs `cl /std:c++latest /EHsc /utf-8 /Z7 /Od <id>.cpp utils.cpp` into a temporary exe, executes it, and deletes the exe/obj. `scripts/lc-build.cmd <id>.cpp` is compile-only and is used as the VSCode preLaunch task for debugging. (The old WSL script was `./lc.sh`.) If the problem uses `TreeNode`, also include `utils.h` and link `utils.cpp`.
+This initializes the MSVC environment (`scripts/msvc-env.cmd` -> vcvars64) for the Windows SDK headers/libs and `link.exe`, then prepends `C:\Program Files\LLVM\bin` to PATH and runs `clang++ -std=c++23 -finput-charset=UTF-8 -fexec-charset=UTF-8 -g -O0 <id>.cpp utils.cpp -o <id>.exe -fuse-ld=lld`. The exe is executed and then deleted along with its `.pdb`. `scripts/lc-build.cmd <id>.cpp` is compile-only and is used as the VSCode preLaunch task for debugging. If the problem uses `TreeNode`, also include `utils.h` and link `utils.cpp`.
 
-In VSCode: task **lc: build & run current file** (`Ctrl+Shift+B` runs the build task, or bind the run task); **F5** builds and debugs the current file.
+In VSCode: task **lc: build & run current file** (`Ctrl+Shift+B` runs the build task, or bind the run task); **F5** builds and debugs the current file with CodeLLDB (lldb).
+
+## Toolchain
+
+clang++ (LLVM) compiles, lld links, lldb debugs. The MSVC environment is still required: on Windows clang defaults to the MSVC ABI, so the SDK headers, the import libraries and `link.exe` come from Visual Studio. But MSVC's `cl.exe` is not used to compile. Keeping the flags in `scripts/lc-build.cmd` and `.clangd` in sync is manual — there is no `compile_commands.json`.
 
 ## Project structure
 
 - `X.cpp` — LeetCode problem #X with a `class Solution` and a `main()` containing inline test cases (actual vs expected printed to stdout)
 - `utils.h` / `utils.cpp` — shared helpers: `TreeNode` / `buildTree` / `deleteTree`, `printVector`, `printVector2D`, `printMap`, `printQueue`, `printPriorityQueue`, `intToBinaryString`, `binaryStringToInt`
 - `lc.sh` — legacy POSIX build-and-run script (WSL); superseded by `scripts/lc.cmd`
-- `scripts/lc.cmd` / `scripts/lc-build.cmd` — MSVC build-and-run / build-only
-- `scripts/msvc-env.cmd` — initializes the MSVC x64 environment (vcvars64)
+- `scripts/lc.cmd` / `scripts/lc-build.cmd` — clang++ build-and-run / build-only
+- `scripts/msvc-env.cmd` — initializes the MSVC x64 environment (vcvars64), needed for the Windows SDK and linker
 - `.clang-format` — Google-based style, 4-space indent, 80-col limit, C++23
-- `.clangd` — (removed) IntelliSense is now the Microsoft C/C++ extension, configured via `.vscode/c_cpp_properties.json`
+- `.clangd` — IntelliSense flags for the clangd extension (mirrors `scripts/lc-build.cmd`)
 
 ## Format
 

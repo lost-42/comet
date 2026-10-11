@@ -1,11 +1,12 @@
 {
-  // Microsoft C/C++ extension (ms-vscode.cpptools): provides both IntelliSense
-  // (c_cpp_properties.json) and the cppvsdbg debugger on Windows.
+  // CodeLLDB (vadimcn.vscode-lldb): drives lldb, the debugger that pairs with
+  // the clang++ toolchain in scripts/lc-build.cmd. The previous cppvsdbg type
+  // was MSVC-only and could not read an lld/clang-produced binary.
   "version": "0.2.0",
   "configurations": [
     {
       "name": "lc: debug current file",
-      "type": "cppvsdbg",
+      "type": "lldb",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
       "args": [],

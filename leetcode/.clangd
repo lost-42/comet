@@ -1,0 +1,11 @@
+# clangd project configuration.
+#
+# There is no compile_commands.json here: files are built ad-hoc, one at a time,
+# by scripts/lc-build.cmd. So the build flags are mirrored here by hand.
+# If you change the flags in scripts/lc-build.cmd, change them here too.
+CompileFlags:
+  # scripts/lc-build.cmd: clang++ -std=c++23 -finput-charset=UTF-8
+  #                        -fexec-charset=UTF-8 -g -O0
+  Add: [-std=c++23, -finput-charset=UTF-8, -fexec-charset=UTF-8]
+  # Debug info uses CodeView (-g), so the Microsoft ABI applies on Windows.
+  Compiler: clang-cl
