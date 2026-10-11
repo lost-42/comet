@@ -32,21 +32,6 @@ using namespace std;
 class Solution {
 public:
     int numPairsDivisibleBy60(vector<int>& time) {
-        array<int, 60> arr{};
-        for (int t : time) {
-            ++arr[t % 60];
-        }
-
-        int ans{0};
-        for (int i = 0; i <= 30; ++i) {
-            if (i == 0 || i == 30) {
-                ans += (int)((long)arr[i] * (arr[i] - 1) / 2);
-            } else {
-                ans += arr[i] * arr[60 - i];
-            }
-        }
-
-        return ans;
     }
 };
 
